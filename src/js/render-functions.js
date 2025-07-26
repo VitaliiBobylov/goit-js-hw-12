@@ -1,15 +1,14 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 const galleryContainer = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+const loadMoreButton = document.querySelector('.load-more');
 
-export function createMarkup(arr) {
-  return arr
+export function createGallery(images) {
+  if (!images || images.length === 0) {
+    galleryContainer.innerHTML =
+      '<li style="grid-column: 1 / -1; text-align: center; font-size: 18px; color: #666;">No images found.</li>';
+    return;
+  }
+  const markup = images
     .map(
       ({
         webformatURL,
@@ -22,7 +21,7 @@ export function createMarkup(arr) {
       }) => `
         <li class="photo-card">
           <a href="${largeImageURL}">
-            <img src="${webformatURL}" alt="${tags}" />
+            <img src="${webformatURL}" alt="${tags}" loading="lazy" />
           </a>
           <div class="info">
             <p><b>Likes:</b> ${likes}</p>
@@ -34,20 +33,11 @@ export function createMarkup(arr) {
       `
     )
     .join('');
-}
-
-export function renderEmptyMessage(message = 'No images found.') {
-  galleryContainer.innerHTML = `
-    <li style="grid-column: 1 / -1; text-align: center; font-size: 18px; color: #666;">
-      ${message}
-    </li>
-  `;
-}
-
-export function createGallery(arr) {
-  const markup = createMarkup(arr);
   galleryContainer.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
+}
+
+export function clearGallery() {
+  galleryContainer.innerHTML = '';
 }
 
 export function showLoader() {
@@ -58,6 +48,10 @@ export function hideLoader() {
   loader.classList.remove('is-visible');
 }
 
-export function clearGallery() {
-  galleryContainer.innerHTML = '';
+export function showLoadMoreButton() {
+  loadMoreButton.classList.remove('is-hidden');
+}
+
+export function hideLoadMoreButton() {
+  loadMoreButton.classList.add('is-hidden');
 }

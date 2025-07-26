@@ -7,7 +7,6 @@
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
-@import url('./styles.css');
 
 .form {
   display: flex;
@@ -73,6 +72,10 @@
   transition: transform 0.3s ease;
 }
 
+.photo-card:hover {
+  transform: scale(1.03);
+}
+
 .photo-card a {
   display: block;
 }
@@ -97,14 +100,37 @@
   font-weight: 500;
 }
 
+.load-more {
+  color: #fff;
+  background: #4e75ff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 125px;
+  height: 40px;
+  display: block;
+  margin: 20px auto 0;
+  border: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.load-more:hover {
+  background-color: #6c8cff;
+}
+
 .loader {
   display: none;
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  bottom: 20px;
   left: 50%;
+  transform: translateX(-50%);
   width: 40px;
   height: 40px;
-  transform: translate(-50%, -50%);
   z-index: 1000;
 }
 
@@ -120,15 +146,6 @@
   border-radius: 50%;
   background-color: #4e75ff;
   animation: rotate 1s linear infinite;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .iziToast .iziToast-title {
@@ -148,11 +165,47 @@
   bottom: 30px;
   right: 30px;
 }
+
 .iziToast-top-right {
   top: 30px;
   right: 30px;
 }
+
 .container {
   position: relative;
   min-height: 100vh;
+}
+
+.post-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn {
+  color: #fff;
+  background: #4e75ff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 125px;
+  height: 40px;
+  display: inline-block;
+  border: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  overflow: visible;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background-color: #6c8cff;
+}
+
+.is-hidden {
+  display: none;
 }

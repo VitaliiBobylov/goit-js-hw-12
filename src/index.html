@@ -5,6 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.2/dist/simple-lightbox.min.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
     <link
       rel="stylesheet"
@@ -26,12 +30,14 @@
         <button type="submit">Search</button>
       </form>
 
-      <span class="loader">
+      <ul class="gallery"></ul>
+
+      <button type="button" class="load-more is-hidden">Load more</button>
+      <span class="loader is-hidden">
         <div class="css-loader-spinner"></div>
       </span>
-
-      <ul class="gallery"></ul>
     </div>
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>
