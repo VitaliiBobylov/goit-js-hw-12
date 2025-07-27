@@ -57,7 +57,7 @@ form.addEventListener('submit', async event => {
     }
 
     createGallery(data.hits);
-    searchInput.value = query;
+    searchInput.value = '';
     if (page * PERPAGE >= totalHits || data.hits.length < PERPAGE) {
       hideLoadMoreButton();
 
@@ -119,4 +119,11 @@ function smoothScroll() {
     top: cardHeight * 2,
     behavior: 'smooth',
   });
+}
+
+function resetPagination() {
+  page = 1;
+  totalHits = 0;
+  clearGallery();
+  hideLoadMoreButton();
 }
