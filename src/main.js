@@ -10,6 +10,7 @@ import {
   hideLoader,
   showLoader,
   clearGallery,
+  updateLightbox,
 } from './js/render-functions.js';
 
 let page = 1;
@@ -52,13 +53,8 @@ document.querySelector('.form').addEventListener('submit', async event => {
       });
     } else {
       createGallery(data.hits);
-      if (!lightbox) {
-        lightbox = new SimpleLightbox('.gallery a', {
-          captionsData: 'alt',
-          captionDelay: 250,
-        });
-      }
-      lightbox.refresh();
+
+      updateLightbox();
       if (data.hits.length < 15 || totalHits <= page * 15) {
         hideLoadMoreButton();
         if (totalHits > 0) {
@@ -94,7 +90,7 @@ document.querySelector('.load-more').addEventListener('click', async () => {
   try {
     const data = await fetchImages(currentQuery);
     createGallery(data.hits);
-    lightbox.refresh();
+    updateLightbox();
     if (page * 15 >= totalHits || data.hits.length < 15) {
       hideLoadMoreButton();
       iziToast.info({

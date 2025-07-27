@@ -1,13 +1,13 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const galleryContainer = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 const loadMoreButton = document.querySelector('.load-more');
 
+let lightbox = null;
+
 export function createGallery(images) {
-  if (!images || images.length === 0) {
-    galleryContainer.innerHTML =
-      '<li style="grid-column: 1 / -1; text-align: center; font-size: 18px; color: #666;">No images found.</li>';
-    return;
-  }
   const markup = images
     .map(
       ({
@@ -34,6 +34,7 @@ export function createGallery(images) {
     )
     .join('');
   galleryContainer.insertAdjacentHTML('beforeend', markup);
+  updateLightbox();
 }
 
 export function clearGallery() {
@@ -54,4 +55,23 @@ export function showLoadMoreButton() {
 
 export function hideLoadMoreButton() {
   loadMoreButton.classList.add('is-hidden');
+}
+
+export function updateLightbox() {
+  console.log('Lightbox updated');
+  if (!lightbox) {
+    lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
+  } else {
+    lightbox.refresh();
+  }
+}
+
+export function destroyLightbox() {
+  if (lightbox) {
+    lightbox.destroy();
+    lightbox = null;
+  }
 }
