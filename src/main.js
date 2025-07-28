@@ -34,10 +34,7 @@ form.addEventListener('submit', async event => {
 
   if (query !== currentQuery) {
     currentQuery = query;
-    page = 1;
-    totalHits = 0;
-    clearGallery();
-    hideLoadMoreButton();
+    resetPagination();
   }
 
   showLoader();
@@ -53,11 +50,13 @@ form.addEventListener('submit', async event => {
           'Sorry, there are no images matching your search query. Please try again!',
         position: 'topRight',
       });
+
+      hideLoader();
       return;
     }
 
     createGallery(data.hits);
-    searchInput.value = '';
+
     if (page * PERPAGE >= totalHits || data.hits.length < PERPAGE) {
       hideLoadMoreButton();
 
@@ -69,6 +68,7 @@ form.addEventListener('submit', async event => {
     } else {
       showLoadMoreButton();
     }
+
     smoothScroll();
   } catch (error) {
     iziToast.error({
@@ -100,6 +100,7 @@ loadMoreBtn.addEventListener('click', async () => {
     } else {
       showLoadMoreButton();
     }
+
     smoothScroll();
   } catch (error) {
     iziToast.error({
