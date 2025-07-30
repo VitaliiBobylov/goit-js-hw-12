@@ -68,8 +68,6 @@ form.addEventListener('submit', async event => {
     } else {
       showLoadMoreButton();
     }
-
-    smoothScroll();
   } catch (error) {
     iziToast.error({
       title: 'Error',
